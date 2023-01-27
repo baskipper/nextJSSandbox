@@ -32,24 +32,50 @@ const DUMMY_EVENTS = [
 ];
 
 export function getFeaturedEvents() {
-return DUMMY_EVENTS.filter((event) => event.isFeatured);
+return new Promise((resolve, reject) => {
+  try {
+    resolve(DUMMY_EVENTS.filter((event) => event.isFeatured))
+  } catch (error) {
+    reject(error)
+  }
+})
 }
 
-export function getAllEvents() {
-return DUMMY_EVENTS;
+export async function getAllEvents() {
+return new Promise((resolve, reject) => {
+  try {
+    resolve(DUMMY_EVENTS)
+  } catch (error) {
+    reject(error)
+  }
+})
+
 }
 
-export function getFilteredEvents(dateFilter) {
+export  function getFilteredEvents(dateFilter) {
 const { year, month } = dateFilter;
 
 let filteredEvents = DUMMY_EVENTS.filter((event) => {
-const eventDate = new Date(event.date);
-return eventDate.getFullYear() === year && eventDate.getMonth() === month - 1;
+  const eventDate = new Date(event.date);
+  return eventDate.getFullYear() === year && eventDate.getMonth() === month - 1;
 });
 
-return filteredEvents;
+return new Promise((resolve, reject) => {
+  try {
+    resolve(filteredEvents)
+  } catch (error) {
+    reject(error)
+  }
+})
 }
 
 export function getEventById(id) {
-return DUMMY_EVENTS.find((event) => event.id === id);
+  return new Promise((resolve, reject) => {
+    try {
+      resolve(DUMMY_EVENTS.find((event) => event.id === id))
+    } catch (error) {
+      reject(error)
+    }
+  })
+
 }
